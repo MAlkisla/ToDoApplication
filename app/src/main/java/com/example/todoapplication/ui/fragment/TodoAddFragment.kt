@@ -6,10 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.todoapplication.databinding.FragmentTodoAddBinding
+import com.example.todoapplication.ui.viewmodel.TodoAddViewModel
 
 class TodoAddFragment : Fragment() {
     private lateinit var binding: FragmentTodoAddBinding
+    private lateinit var viewModel: TodoAddViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -18,13 +21,17 @@ class TodoAddFragment : Fragment() {
 
         binding.buttonAdd.setOnClickListener {
             val todo_name = binding.editTextTodoName.text.toString()
-            add(todo_name)
+            viewModel.add(todo_name)
         }
 
         return binding.root
     }
 
-    private fun add(todo_name:String){
-        Log.e("To-Do Add", "$todo_name")
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val tempViewModel: TodoAddViewModel by viewModels()
+        viewModel = tempViewModel
     }
 }

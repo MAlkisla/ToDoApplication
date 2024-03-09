@@ -9,9 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapplication.data.entity.Todos
 import com.example.todoapplication.databinding.CardDesignBinding
 import com.example.todoapplication.ui.fragment.HomepageFragmentDirections
+import com.example.todoapplication.ui.viewmodel.HomepageViewModel
+import com.example.todoapplication.utils.migration
 import com.google.android.material.snackbar.Snackbar
 
-class TodosAdapter(private var mContext: Context, private var todosList: List<Todos>)
+class TodosAdapter(private var mContext: Context,
+                   private var todosList: List<Todos>,
+                   private var viewModel:HomepageViewModel)
     : RecyclerView.Adapter<TodosAdapter.CardDesignHolder>() {
     inner class CardDesignHolder(var design: CardDesignBinding): RecyclerView.ViewHolder(design.root)
 
@@ -27,13 +31,13 @@ class TodosAdapter(private var mContext: Context, private var todosList: List<To
 
         t.cardViewRow.setOnClickListener {
             val migration = HomepageFragmentDirections.todoDetailMigration(todo = todo)
-            Navigation.findNavController(it).navigate(migration)
+            Navigation.migration(it,migration)
         }
 
         t.imageViewDelete.setOnClickListener {
             Snackbar.make(it,"Delete ${todo.todo_name} ?", Snackbar.LENGTH_SHORT)
                 .setAction("YES"){
-                    delete(todo.todo_id)
+                    viewModel.delete(todo.todo_id)
                 }.show()
         }
     }
@@ -42,8 +46,5 @@ class TodosAdapter(private var mContext: Context, private var todosList: List<To
         return todosList.size
     }
 
-    private fun delete(todo_id:Int){
-        Log.e("To-Do Delete", todo_id.toString())
-    }
 
 }
