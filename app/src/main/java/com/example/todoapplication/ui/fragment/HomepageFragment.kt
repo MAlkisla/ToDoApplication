@@ -17,7 +17,9 @@ import com.example.todoapplication.databinding.FragmentHomepageBinding
 import com.example.todoapplication.ui.adapter.TodosAdapter
 import com.example.todoapplication.ui.viewmodel.HomepageViewModel
 import com.example.todoapplication.utils.migration
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomepageFragment : Fragment() {
     private lateinit var binding: FragmentHomepageBinding
     private lateinit var viewModel: HomepageViewModel
