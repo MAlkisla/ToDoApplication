@@ -25,16 +25,14 @@ class TodoDetailFragment : Fragment() {
         val bundle: TodoDetailFragmentArgs by navArgs()
         val inboundTodo = bundle.todo
 
-        binding.editTextTodoName.setText(inboundTodo.todo_name)
+        binding.editTextTodoName.setText(inboundTodo.name)
 
         binding.buttonUpdate.setOnClickListener {
-            val todo_name = binding.editTextTodoName.text.toString()
-            viewModel.update(inboundTodo.todo_id, todo_name)
+            val name = binding.editTextTodoName.text.toString()
+            viewModel.update(inboundTodo.id, name)
         }
         return binding.root
     }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

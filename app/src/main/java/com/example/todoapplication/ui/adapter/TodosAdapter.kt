@@ -1,7 +1,6 @@
 package com.example.todoapplication.ui.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
@@ -27,7 +26,7 @@ class TodosAdapter(private var mContext: Context,
     override fun onBindViewHolder(holder: CardDesignHolder, position: Int) {
         val todo = todosList[position]
         val t = holder.design
-        t.textViewTodoName.text = todo.todo_name
+        t.textViewTodoName.text = todo.name
 
         t.cardViewRow.setOnClickListener {
             val migration = HomepageFragmentDirections.todoDetailMigration(todo = todo)
@@ -35,9 +34,9 @@ class TodosAdapter(private var mContext: Context,
         }
 
         t.imageViewDelete.setOnClickListener {
-            Snackbar.make(it,"Delete ${todo.todo_name} ?", Snackbar.LENGTH_SHORT)
+            Snackbar.make(it,"Delete ${todo.name} ?", Snackbar.LENGTH_SHORT)
                 .setAction("YES"){
-                    viewModel.delete(todo.todo_id)
+                    viewModel.delete(todo.id)
                 }.show()
         }
     }

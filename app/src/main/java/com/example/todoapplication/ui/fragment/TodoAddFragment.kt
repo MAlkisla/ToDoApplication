@@ -22,14 +22,12 @@ class TodoAddFragment : Fragment() {
         binding = FragmentTodoAddBinding.inflate(inflater, container, false)
 
         binding.buttonAdd.setOnClickListener {
-            val todo_name = binding.editTextTodoName.text.toString()
-            viewModel.add(todo_name)
+            val name = binding.editTextTodoName.text.toString()
+            viewModel.add(name)
         }
 
         return binding.root
     }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

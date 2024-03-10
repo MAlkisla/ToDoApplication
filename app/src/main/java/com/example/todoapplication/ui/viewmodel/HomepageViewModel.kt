@@ -11,16 +11,16 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomepageViewModel @Inject constructor(var todosRepository: TodosRepository) : ViewModel() {
+class HomepageViewModel @Inject constructor(private var todosRepository: TodosRepository) : ViewModel() {
     var todosList = MutableLiveData<List<Todos>>()
 
     init {
         loadTodos()
     }
 
-    fun delete(todo_id: Int) {
+    fun delete(id: Int) {
         CoroutineScope(Dispatchers.Main).launch {
-            todosRepository.delete(todo_id)
+            todosRepository.delete(id)
             loadTodos()
         }
     }

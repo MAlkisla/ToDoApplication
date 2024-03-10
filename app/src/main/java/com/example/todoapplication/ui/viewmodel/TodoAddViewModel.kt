@@ -9,10 +9,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TodoAddViewModel @Inject constructor(var todosRepository: TodosRepository): ViewModel()  {
-    fun add(todo_name: String){
+class TodoAddViewModel @Inject constructor(private var todosRepository: TodosRepository): ViewModel()  {
+    fun add(name: String){
         CoroutineScope(Dispatchers.Main).launch {
-            todosRepository.add(todo_name)
+            todosRepository.add(name)
         }
     }
 }
